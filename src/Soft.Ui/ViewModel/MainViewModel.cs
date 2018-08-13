@@ -30,6 +30,18 @@ namespace Soft.Ui.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private bool _isMainNavigationViewShown;
+
+        public bool IsMainNavigationViewShown
+        {
+            get { return _isMainNavigationViewShown; }
+            set {
+                _isMainNavigationViewShown = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand CommandCreateSingleDetailView { get; set; }
         #endregion
 
@@ -54,6 +66,8 @@ namespace Soft.Ui.ViewModel
             ViewModels = new ObservableCollection<IViewModel>();
 
             CommandCreateSingleDetailView = new DelegateCommand<Type>(OnCommandCreateSingleDetailView);
+
+            IsMainNavigationViewShown = false;
         }
         #endregion
 
@@ -86,7 +100,12 @@ namespace Soft.Ui.ViewModel
                 }
                 ViewModels.Add(viewModel);
             }
+
+            //Set the focus to the selected ViewModel
             SelectedViewModel = viewModel;
+
+            //Hide the MainNavigationView:
+            IsMainNavigationViewShown = false;
         }
         /// <summary>
         /// Removes ViewModel, identified by the combination of the event arguments, from ViewModels list, after Detail (Entity) was deleted.

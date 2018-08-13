@@ -40,16 +40,16 @@
 
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
-            <Controls:Flyout x:Name="flyoutNavigation" Header="Menu" Position="Right"  Width="200" IsOpen="{Binding IsOpen}" >
+            <Controls:Flyout x:Name="flyoutNavigation" Header="Menu" Position="Left"  Width="200" IsOpen="{Binding IsMainNavigationViewShown}" >
                 <viewModel:MainNavigationView DataContext="{Binding MainNavigationViewModel}"/>
             </Controls:Flyout>
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
-    <Controls:MetroWindow.RightWindowCommands>
+    <Controls:MetroWindow.LeftWindowCommands>
         <Controls:WindowCommands>
-            <ToggleButton Content="Menu" IsChecked="{Binding ElementName=flyoutNavigation, Path=IsOpen}" Cursor="Hand"/>
+            <ToggleButton Content="Menu" IsChecked="{Binding IsMainNavigationViewShown}" Cursor="Hand"/>
         </Controls:WindowCommands>
-    </Controls:MetroWindow.RightWindowCommands>
+    </Controls:MetroWindow.LeftWindowCommands>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -73,7 +73,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
-            </Grid.ColumnDefinitions>            
+            </Grid.ColumnDefinitions>
 
             <Controls:MetroTabControl Grid.Row="1" Grid.Column="1" 
                                       ItemsSource="{Binding ViewModels, UpdateSourceTrigger=PropertyChanged}" 
@@ -85,7 +85,7 @@
                         <Setter Property="Controls:MetroTabItem.CloseButtonEnabled" Value="True"/>
                         <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="14"/>
                     </Style>
-                </Controls:MetroTabControl.ItemContainerStyle>                                                 
+                </Controls:MetroTabControl.ItemContainerStyle>
             </Controls:MetroTabControl>
         </Grid>
 
