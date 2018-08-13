@@ -105,6 +105,21 @@ namespace Soft.Ui.Tests.ViewModel
         }
 
         [Fact]
+        public void EventOpenNavigationOrDetailViewModel_When_Raised_For_CustomerDetailViewModel_Should_Set_IsMainNavigationViewShown_To_False()
+        { 
+            // Arrange
+            var anyMockedUpCusomerId = 2;
+
+            //Act
+            _mainViewModel.IsMainNavigationViewShown = true;
+            _eventOpenNavigationOrDetailViewModel.Publish(
+                new EventOpenNavigationOrDetailViewModelArgs { Id = anyMockedUpCusomerId, ViewModelName = nameof(CustomerDetailViewModel) });
+
+            //Assert
+            Assert.False(_mainViewModel.IsMainNavigationViewShown);            
+        }
+
+        [Fact]
         public void EventOpenNavigationOrDetailViewModel_When_Raised_For_CustomerNavigationViewModel_Should_Raise_PropertyChanged_For_SelectedDetailViewModel()
         {
             // Arrange
@@ -259,6 +274,12 @@ namespace Soft.Ui.Tests.ViewModel
         public void Ctor_Should_Set_CommandCreateSingleDetailView()
         {
             Assert.NotNull(_mainViewModel.CommandCreateSingleDetailView);
+        }
+
+        [Fact]
+        public void Ctor_Should_Set_IsMainNavigationViewShown_To_False()
+        {
+            Assert.False(_mainViewModel.IsMainNavigationViewShown);
         }
 
         [Fact]

@@ -93,8 +93,13 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Statusbar"/>
+            <Controls:ProgressRing Grid.Column="0" Width="20" Height="20" Visibility="Visible" IsActive="False"/>
+            <TextBlock Grid.Column="1" Text="Statusbar"/>
         </Grid>
     </Grid>
 </Controls:MetroWindow>
