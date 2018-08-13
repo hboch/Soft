@@ -1,0 +1,100 @@
+﻿<Controls:MetroWindow x:Class="Soft.Ui.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      
+        xmlns:viewModel="clr-namespace:Soft.Ui.ViewModel"
+        xmlns:bcAllgemein="clr-namespace:Soft.Ui.Bc.Shared" 
+        xmlns:bcCustomerViewModel="clr-namespace:Soft.Ui.Bc.BcCustomer"
+        xmlns:bcBroker="clr-namespace:Soft.Ui.Bc.BcBroker" 
+        xmlns:bcAccountManagerViewModel="clr-namespace:Soft.Ui.Bc.BcAccountManager" 
+        mc:Ignorable="d"
+        Title="Sample forms over data WPF app" Height="700" Width="1000" FontSize="20">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type bcAllgemein:AboutViewModel}">
+            <bcAllgemein:AboutView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type bcCustomerViewModel:CustomerNavigationViewModel}">
+            <bcCustomerViewModel:CustomerNavigationView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type bcCustomerViewModel:CustomerDetailViewModel}">
+            <bcCustomerViewModel:CustomerDetailView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type bcBroker:BrokerNavigationViewModel}">
+            <bcBroker:BrokerNavigationView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type bcBroker:BrokerDetailViewModel}">
+            <bcBroker:BrokerDetailView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type bcAccountManagerViewModel:AccountManagerNavigationViewModel}">
+            <bcAccountManagerViewModel:AccountManagerNavigationView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type bcAccountManagerViewModel:AccountManagerDetailViewModel}">
+            <bcAccountManagerViewModel:AccountManagerDetailView/>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <Controls:Flyout x:Name="flyoutNavigation" Header="Menu" Position="Right"  Width="200" IsOpen="{Binding IsOpen}" >
+                <viewModel:MainNavigationView DataContext="{Binding MainNavigationViewModel}"/>
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <ToggleButton Content="Menu" IsChecked="{Binding ElementName=flyoutNavigation, Path=IsOpen}" Cursor="Hand"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="About"
+                      Command="{Binding CommandCreateSingleDetailView}"
+                      CommandParameter="{x:Type bcAllgemein:AboutViewModel}"/>
+
+        </Menu>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>            
+
+            <Controls:MetroTabControl Grid.Row="1" Grid.Column="1" 
+                                      ItemsSource="{Binding ViewModels, UpdateSourceTrigger=PropertyChanged}" 
+                                      SelectedItem="{Binding SelectedViewModel, Mode=TwoWay}"
+                                      CloseTabCommand="{Binding CommandClose}" >
+                <Controls:MetroTabControl.ItemContainerStyle>
+                    <Style TargetType="{x:Type Controls:MetroTabItem}">
+                        <Setter Property="Header" Value="{Binding TabDisplayName, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Setter Property="Controls:MetroTabItem.CloseButtonEnabled" Value="True"/>
+                        <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="14"/>
+                    </Style>
+                </Controls:MetroTabControl.ItemContainerStyle>                                                 
+            </Controls:MetroTabControl>
+        </Grid>
+
+        <Grid Grid.Row="2" Background="#FFD3CFCF" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Statusbar"/>
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>
