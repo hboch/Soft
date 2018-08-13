@@ -114,7 +114,7 @@ namespace Soft.Ui.Tests.Bc.BcCustomer
             Assert.True(fired);
         }
         [Fact]
-        public void Internet_When_Set_Should_Raise_PropertyChangedEvent()
+        public void InternetAdress_When_Set_Should_Raise_PropertyChangedEvent()
         {
             //Act
             var fired = _customerWrapper.IsPropertyChangedFired

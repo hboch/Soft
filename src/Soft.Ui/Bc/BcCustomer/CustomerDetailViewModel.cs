@@ -78,6 +78,7 @@ namespace Soft.Ui.Bc.BcCustomer
         public ICommand CommandDeleteBankAccount { get; set; }
 
         public ObservableCollection<CustomerBankAccountWrapper> ListCustomerBankAccountWrapper { get; }
+
         private CustomerBankAccountWrapper _selectedAccount;
         public CustomerBankAccountWrapper SelectedBankAccount
         {

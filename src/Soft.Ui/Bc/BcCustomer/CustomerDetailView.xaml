@@ -3,23 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             
              xmlns:local="clr-namespace:Soft.Ui.Bc.BcCustomer"
+             
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="300">
+             d:DesignHeight="500" d:DesignWidth="500">
+
+    <UserControl.Resources>
+        <Style x:Key="TabHeaderLevel2" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
+            <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="14"></Setter>
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
@@ -28,43 +28,69 @@
             <Button Content="Delete" Width="125" Margin="10" Command="{Binding CommandDelete}"/>
         </StackPanel>
 
-        <Label Grid.Row="1" Content="Name" Margin="5 5 5 0"/>
-        <TextBox Grid.Row="2" Margin="5 0 5 5" Text="{Binding Customer.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <Controls:MetroTabControl Grid.Row="1" >
+            <Controls:MetroTabItem Header="Common" Style="{StaticResource TabHeaderLevel2}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>                        
+                    </Grid.RowDefinitions>
 
-        <Label Grid.Row="3" Content="Customer No." Margin="5 5 5 0"/>
-        <TextBox Grid.Row="4" Margin="5 0 5 5" Text="{Binding Customer.CustomerNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label Grid.Row="1" Content="Name" Margin="5 5 5 0"/>
+                    <TextBox Grid.Row="2" Margin="5 0 5 5" Text="{Binding Customer.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        <Label Grid.Row="5" Content="Customer since" Margin="5 5 5 0"/>
-        <DatePicker Grid.Row="6" Margin="5 0 5 5" 
-                    SelectedDate="{Binding Customer.CustomerSince, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                    <Label Grid.Row="3" Content="Customer No." Margin="5 5 5 0"/>
+                    <TextBox Grid.Row="4" Margin="5 0 5 5" Text="{Binding Customer.CustomerNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <Label Grid.Row="5" Content="Customer since" Margin="5 5 5 0"/>
+                    <DatePicker Grid.Row="6" Margin="5 0 5 5" 
+                                SelectedDate="{Binding Customer.CustomerSince, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                     />
-        <Label Grid.Row="7" Content="Account Manager" Margin="5 5 5 0"/>
-        <ComboBox Grid.Row="8" Margin="5 0 5 5" SelectedValue="{Binding Customer.AccountManagerId, Mode=TwoWay}"
-                  ItemsSource="{Binding LookupItemsAccountManager}" 
-                  SelectedValuePath="Id"                  
-                  DisplayMemberPath="DisplayMember"
-                  />
+                    <Label Grid.Row="7" Content="Account Manager" Margin="5 5 5 0"/>
+                    <ComboBox Grid.Row="8" Margin="5 0 5 5" SelectedValue="{Binding Customer.AccountManagerId, Mode=TwoWay}"
+                              ItemsSource="{Binding LookupItemsAccountManager}" 
+                              SelectedValuePath="Id"                  
+                              DisplayMemberPath="DisplayMember"
+                    />
+                    <Label Grid.Row="9" Content="Internet" Margin="5 5 5 0"/>
+                    <TextBox Grid.Row="10" Margin="5 0 5 5" Text="{Binding Customer.InternetAdress, TargetNullValue='', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />                    
+                </Grid>
+            </Controls:MetroTabItem>
 
-        <Label Grid.Row="9" Content="Internet" Margin="5 5 5 0"/>
-        <TextBox Grid.Row="10" Margin="5 0 5 5" Text="{Binding Customer.Internet, TargetNullValue='', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Controls:MetroTabItem Header="Bank Accounts" Style="{StaticResource TabHeaderLevel2}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>                        
+                    </Grid.RowDefinitions>
 
-        <DockPanel Grid.Row="11" Margin="5">
-            <StackPanel DockPanel.Dock="Right">
-                <Button Content="Add" Width="125"  Margin="10"
-                Command="{Binding CommandAddBankAccount}"/>
-                <Button Content="Delete" Width="125"  Margin="10"
-                Command="{Binding CommandDeleteBankAccount}"/>
-            </StackPanel>
-            <DataGrid ItemsSource="{Binding ListBankAccountWrapper}" 
-                      SelectedItem="{Binding SelectedBankAccount, Mode=TwoWay}"
-                      AutoGenerateColumns="False" RowHeaderWidth="0">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Account No." Width="*"
-                                        Binding="{Binding AccountNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                        ElementStyle="{StaticResource DataGridColumnStyle}"
-                                        EditingElementStyle="{StaticResource DataGridEditingColumnStyle}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </DockPanel>
+                    <DockPanel Grid.Row="0" Margin="5">
+                        <StackPanel DockPanel.Dock="Right">
+                            <Button Content="Add" Width="125"  Margin="10" Command="{Binding CommandAddBankAccount}"/>
+                            <Button Content="Delete" Width="125"  Margin="10" Command="{Binding CommandDeleteBankAccount}"/>
+                        </StackPanel>
+                        <DataGrid ItemsSource="{Binding ListCustomerBankAccountWrapper}" 
+                                  SelectedItem="{Binding SelectedBankAccount, Mode=TwoWay}"
+                                  AutoGenerateColumns="False" RowHeaderWidth="0">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Account No." Width="*"
+                                                    Binding="{Binding AccountNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    ElementStyle="{StaticResource DataGridColumnStyle}"
+                                                    EditingElementStyle="{StaticResource DataGridEditingColumnStyle}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+                </Grid>
+            </Controls:MetroTabItem>
+        </Controls:MetroTabControl>
     </Grid>
+
 </UserControl>
