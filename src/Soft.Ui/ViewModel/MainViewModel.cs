@@ -36,12 +36,23 @@ namespace Soft.Ui.ViewModel
         public bool IsMainNavigationViewShown
         {
             get { return _isMainNavigationViewShown; }
-            set {
+            set
+            {
                 _isMainNavigationViewShown = value;
                 OnPropertyChanged();
             }
         }
+        private bool _isBusy;
 
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set
+            {
+                _isBusy = value;
+                OnPropertyChanged();
+            }
+        }
         public ICommand CommandCreateSingleDetailView { get; set; }
         #endregion
 
@@ -82,9 +93,11 @@ namespace Soft.Ui.ViewModel
         /// <param name="eventOpenViewModelArgs">Id and Name of the ViewModel</param>
         private async void OnEventOpenNavigationOrDetailViewModel(EventOpenNavigationOrDetailViewModelArgs eventOpenViewModelArgs)
         {
+            IsBusy = true;
+
             var viewModel = ViewModels.SingleOrDefault(dvm
-                => dvm.Id == eventOpenViewModelArgs.Id
-                && dvm.Name == eventOpenViewModelArgs.ViewModelName);
+                            => dvm.Id == eventOpenViewModelArgs.Id
+                            && dvm.Name == eventOpenViewModelArgs.ViewModelName);
 
             //ViewModel does not exist ViewModels
             //-> create, call ViewModels LoadAsync function and add ViewModel to ViewModels
@@ -92,12 +105,7 @@ namespace Soft.Ui.ViewModel
             {
                 viewModel = _viewModelFactory.Create(eventOpenViewModelArgs.ViewModelName);
                 bool loadAsyncSucessful = await viewModel.LoadAsync(eventOpenViewModelArgs.Id);
-                if (!loadAsyncSucessful)
-                {
-                    _messageDialogService.ShowInfoDialog("Entry could not be loaded as it might have been deleted. Displayed Entries are refreshed.", "Information");
-                    //await NavigationViewModel.LoadAsync();
-                    return;
-                }
+                //bool loadAsyncSucessful = await Task.Run(() => viewModel.LoadAsync(eventOpenViewModelArgs.Id));
                 ViewModels.Add(viewModel);
             }
 
@@ -106,7 +114,9 @@ namespace Soft.Ui.ViewModel
 
             //Hide the MainNavigationView:
             IsMainNavigationViewShown = false;
+            IsBusy = false;
         }
+
         /// <summary>
         /// Removes ViewModel, identified by the combination of the event arguments, from ViewModels list, after Detail (Entity) was deleted.
         /// </summary>
@@ -145,9 +155,9 @@ namespace Soft.Ui.ViewModel
         /// </summary>
         /// <param name="objektType">ViewModel type</param>
         private void OnCommandCreateSingleDetailView(Type objektType)
-        {              
-            if (objektType.GetInterfaces().Contains(typeof(IViewModel)))            
-                {
+        {
+            if (objektType.GetInterfaces().Contains(typeof(IViewModel)))
+            {
                 var viewModelName = objektType.Name;
                 _eventAggregator.GetEvent<EventOpenNavigationOrDetailViewModel>().Publish(
                     new EventOpenNavigationOrDetailViewModelArgs { Id = 0, ViewModelName = viewModelName });

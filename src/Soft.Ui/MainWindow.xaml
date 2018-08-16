@@ -78,12 +78,14 @@
             <Controls:MetroTabControl Grid.Row="1" Grid.Column="1" 
                                       ItemsSource="{Binding ViewModels, UpdateSourceTrigger=PropertyChanged}" 
                                       SelectedItem="{Binding SelectedViewModel, Mode=TwoWay}"
-                                      CloseTabCommand="{Binding CommandClose}" >
+                                      
+                                      >
                 <Controls:MetroTabControl.ItemContainerStyle>
                     <Style TargetType="{x:Type Controls:MetroTabItem}">
                         <Setter Property="Header" Value="{Binding TabDisplayName, UpdateSourceTrigger=PropertyChanged}"/>
                         <Setter Property="Controls:MetroTabItem.CloseButtonEnabled" Value="True"/>
                         <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="14"/>
+                        <Setter Property="CloseTabCommand" Value="{Binding CommandClose}"/>
                     </Style>
                 </Controls:MetroTabControl.ItemContainerStyle>
             </Controls:MetroTabControl>
@@ -94,12 +96,12 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
-            <Controls:ProgressRing Grid.Column="0" Width="20" Height="20" Visibility="Visible" IsActive="False"/>
-            <TextBlock Grid.Column="1" Text="Statusbar"/>
+            
+            <TextBlock Grid.Column="0" Text="Statusbar"/>
+            <Controls:ProgressRing Grid.Column="1" Width="20" Height="20" Visibility="Visible" IsActive="{Binding IsBusy}"/>
         </Grid>
     </Grid>
 </Controls:MetroWindow>
