@@ -50,6 +50,11 @@
             <ToggleButton Content="Menu" IsChecked="{Binding IsMainNavigationViewShown}" Cursor="Hand"/>
         </Controls:WindowCommands>
     </Controls:MetroWindow.LeftWindowCommands>
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="About" Command="{Binding CommandCreateSingleDetailView}" CommandParameter="{x:Type bcAllgemein:AboutViewModel}" Cursor="Hand"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -59,9 +64,10 @@
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0">
-            <MenuItem Header="About"
+            <!--<MenuItem Header="About"
                       Command="{Binding CommandCreateSingleDetailView}"
-                      CommandParameter="{x:Type bcAllgemein:AboutViewModel}"/>
+                      CommandParameter="{x:Type bcAllgemein:AboutViewModel}"
+            />-->
 
         </Menu>
 
