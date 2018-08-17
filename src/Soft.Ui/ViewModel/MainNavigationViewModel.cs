@@ -42,9 +42,9 @@ namespace Soft.Ui.ViewModel
             MenuItems.Clear();
             //Add a MenuItem by using the following schema:
             //MenuItems.Add(new MainNavigationItemViewModel(displayMember: {Menu item display name in the UI}, viewModelName: nameof({Entity}NavigationViewModel), eventAggregator: _eventAggregator));
-            MenuItems.Add(new MainNavigationItemViewModel(displayMember: "Account Manager", viewModelName: nameof(AccountManagerNavigationViewModel), eventAggregator: _eventAggregator));
-            MenuItems.Add(new MainNavigationItemViewModel(displayMember: "Broker", viewModelName: nameof(BrokerNavigationViewModel), eventAggregator: _eventAggregator));
-            MenuItems.Add(new MainNavigationItemViewModel(displayMember: "Customers", viewModelName: nameof(CustomerNavigationViewModel), eventAggregator: _eventAggregator));
+            MenuItems.Add(new MainNavigationItemViewModel(iconPackUri: "pack://application:,,,/Resources/AccountManager.png", displayMember: "Account Managers", viewModelName: nameof(AccountManagerNavigationViewModel), eventAggregator: _eventAggregator));
+            MenuItems.Add(new MainNavigationItemViewModel(iconPackUri: "pack://application:,,,/Resources/Broker.png", displayMember: "Brokers", viewModelName: nameof(BrokerNavigationViewModel), eventAggregator: _eventAggregator));
+            MenuItems.Add(new MainNavigationItemViewModel(iconPackUri: "pack://application:,,,/Resources/Customers.png", displayMember: "Customers", viewModelName: nameof(CustomerNavigationViewModel), eventAggregator: _eventAggregator));
         }
         #endregion
     }
