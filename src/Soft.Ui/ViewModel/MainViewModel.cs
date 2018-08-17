@@ -106,9 +106,17 @@ namespace Soft.Ui.ViewModel
                 viewModel = _viewModelFactory.Create(eventOpenViewModelArgs.ViewModelName);
                 bool loadAsyncSucessful = await viewModel.LoadAsync(eventOpenViewModelArgs.Id);
                 //bool loadAsyncSucessful = await Task.Run(() => viewModel.LoadAsync(eventOpenViewModelArgs.Id));
-                ViewModels.Add(viewModel);
-            }
 
+                if (!loadAsyncSucessful)
+                {
+                    _messageDialogService.ShowInfoDialog("Entry could not be loaded as it might have been deleted. Displayed Entries are refreshed.", "Information");
+                    //await NavigationViewModel.LoadAsync();
+                    return;
+                }
+
+                ViewModels.Add(viewModel);            
+            }
+            
             //Set the focus to the selected ViewModel
             SelectedViewModel = viewModel;
 
