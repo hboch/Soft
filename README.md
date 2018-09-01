@@ -3,9 +3,12 @@
 Sample C# Project to play around with 
 WPF, MVVM, 
 Entity Framework, 
-Test driven Developement with xunit,
-Prism Eventaggregator 
+Prism Eventaggregator, 
+Dependency Injection with Autofac, 
+Test driven Developement with Xunit 
 and MahApps.
 
 
 ![ScreenShot](/screenshots/Soft-NavigationMenu.png)
+
+![ScreenShot](/screenshots/Soft-TabNavigationAndCustomerDetails.png)
