@@ -186,7 +186,7 @@ namespace Soft.Ui.ViewModel
         /// Load ViewModel content
         /// </summary>
         /// <param name="id">is always 0 for a NavigationViewModel . It is a Dummy-Parameter to have the same signature as fopr a DetailViewModel.</param>
-        /// <returns>True, wenn Laden des Inhalts erfolgreich war</returns>
+        /// <returns>True, if Load was successful</returns>
         public abstract Task<bool> LoadAsync(int id);
 
         /// <summary>

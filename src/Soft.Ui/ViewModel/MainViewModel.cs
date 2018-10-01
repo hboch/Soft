@@ -99,21 +99,30 @@ namespace Soft.Ui.ViewModel
                             => dvm.Id == eventOpenViewModelArgs.Id
                             && dvm.Name == eventOpenViewModelArgs.ViewModelName);
 
-            //ViewModel does not exist ViewModels
+            //ViewModel does not exist in ViewModels
             //-> create, call ViewModels LoadAsync function and add ViewModel to ViewModels
             if (viewModel == null)
             {
                 viewModel = _viewModelFactory.Create(eventOpenViewModelArgs.ViewModelName);
                 bool loadAsyncSucessful = await viewModel.LoadAsync(eventOpenViewModelArgs.Id);
                 //bool loadAsyncSucessful = await Task.Run(() => viewModel.LoadAsync(eventOpenViewModelArgs.Id));
-                ViewModels.Add(viewModel);
+
+                if (loadAsyncSucessful)
+                {
+                    ViewModels.Add(viewModel);
+
+
+                    //Set the focus to the selected ViewModel
+                    SelectedViewModel = viewModel;
+
+                    //Hide the MainNavigationView:
+                    IsMainNavigationViewShown = false;
+                }
+                else
+                {
+                    _messageDialogService.ShowInfoDialog("Entry could not be loaded as it might have been deleted. Displayed Entries are refreshed.", "Information");
+                }
             }
-
-            //Set the focus to the selected ViewModel
-            SelectedViewModel = viewModel;
-
-            //Hide the MainNavigationView:
-            IsMainNavigationViewShown = false;
             IsBusy = false;
         }
 
