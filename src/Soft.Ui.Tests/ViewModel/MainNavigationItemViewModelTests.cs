@@ -12,6 +12,7 @@ namespace Soft.Ui.Tests.ViewModel
         private Mock<EventOpenNavigationOrDetailViewModel> _eventOpenNavigationOrDetailViewModel;
         private MainNavigationItemViewModel _viewModel;
 
+        const string anyIconPackUri = "pack://application:,,,/Resources/Customers.png";
         const string anyLookupItemDisplayMember = "AnyString";
         const string anyViewModelName = "AnyViewModelName";
 
@@ -22,11 +23,11 @@ namespace Soft.Ui.Tests.ViewModel
             _eventOpenNavigationOrDetailViewModel = new Mock<EventOpenNavigationOrDetailViewModel>();
             _eventAggregatorMock.Setup(ea => ea.GetEvent<EventOpenNavigationOrDetailViewModel>()).Returns(_eventOpenNavigationOrDetailViewModel.Object);
 
-            _viewModel = new MainNavigationItemViewModel(anyLookupItemDisplayMember, anyViewModelName, _eventAggregatorMock.Object);
+            _viewModel = new MainNavigationItemViewModel(anyIconPackUri, anyLookupItemDisplayMember, anyViewModelName, _eventAggregatorMock.Object);
         }
 
         [Fact]
-        public void CommandOpenNavigationViewModel_When_Executed_Should_Publish_EventOpenNavigationView_For_IrgendeinViewModelName()
+        public void CommandOpenNavigationViewModel_When_Executed_Should_Publish_EventOpenNavigationView_For_AnyViewModelName()
         {
             //Act
             _viewModel.CommandOpenNavigationViewModel.Execute(anyViewModelName);

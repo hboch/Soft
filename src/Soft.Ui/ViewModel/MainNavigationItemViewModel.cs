@@ -1,5 +1,4 @@
-﻿//TODO Check comments
-using Prism.Commands;
+﻿using Prism.Commands;
 using System.Windows.Input;
 using System;
 using Prism.Events;
@@ -18,25 +17,37 @@ namespace Soft.Ui.ViewModel
         #region Properties
         private IEventAggregator _eventAggregator;
         public ICommand CommandOpenNavigationViewModel { get; }
-        #endregion
+
+        /// <summary>
+        /// Pack URI for the Icon to be displayed
+        /// </summary>
+        /// <remarks>see https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/aa970069(v=vs.100) </remarks>
+        public string IconPackUri { get; }
+
         public string DisplayMember { get; }
         public string ViewModelName { get; }
+        #endregion
 
+        #region Constructor
         /// <summary>
         /// Creates a MainNavigationItemViewModel based on a NavigationViewModel
         /// </summary>
+        /// <param name="iconPackUri">Pack URI for UI Icon of the MainNavigationItem</param>
         /// <param name="displayMember">UI DisplayName for the MainNavigationItem</param>
         /// <param name="viewModelName">NavigationViewModel Name, which will be created/switched to when item is selected (clicked on)
         /// <param name="eventAggregator">Eventaggregator which will publish an Event when item is selected (clicked on)</param>
-        public MainNavigationItemViewModel(string displayMember, string viewModelName, IEventAggregator eventAggregator)
+        public MainNavigationItemViewModel(string iconPackUri, string displayMember, string viewModelName, IEventAggregator eventAggregator)
         {
+            IconPackUri = iconPackUri;
             DisplayMember = displayMember;
             ViewModelName = viewModelName;
             _eventAggregator = eventAggregator;
 
             CommandOpenNavigationViewModel = new DelegateCommand<string>(OnCommandOpenNavigationViewModel);
         }
+        #endregion
 
+        #region EventHandler
         /// <summary>
         /// Publish EventOpenNavigationOrDetailViewModel here for a NavigationViewModel, 
         /// therefore with EventArgs Id=0 und ViewModelName=navigationViewModelName
@@ -53,5 +64,6 @@ namespace Soft.Ui.ViewModel
                     ViewModelName = navigationViewModelName
                 });
         }
+        #endregion
     }
 }

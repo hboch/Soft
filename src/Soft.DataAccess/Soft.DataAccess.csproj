@@ -55,6 +55,10 @@
     <Compile Include="Migrations\201808130920087_Initial.Designer.cs">
       <DependentUpon>201808130920087_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809012150091_Initial1.cs" />
+    <Compile Include="Migrations\201809012150091_Initial1.Designer.cs">
+      <DependentUpon>201809012150091_Initial1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\Lookup\GenericLookupDataService.cs" />
@@ -76,6 +80,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201808130920087_Initial.resx">
       <DependentUpon>201808130920087_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809012150091_Initial1.resx">
+      <DependentUpon>201809012150091_Initial1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

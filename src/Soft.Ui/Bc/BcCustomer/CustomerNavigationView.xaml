@@ -8,14 +8,19 @@
              d:DesignHeight="300" d:DesignWidth="300">
 
     <Grid>
-        <StackPanel>
-        <Button Content="New" Width="80" HorizontalAlignment="Left" Margin="3" 
-                Command="{Binding CommandCreateNewDetail}"/>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <Button Content="New" Width="125" Margin="5,10" Command="{Binding CommandCreateNewDetail}"/>            
+        </StackPanel>
+        
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
             <ItemsControl ItemsSource="{Binding EntityNavigationItemViewModels}"
                           ItemContainerStyle="{StaticResource NaviItemContainerStyle }"
                           ItemTemplate="{StaticResource NaviItemTemplate}"/>
-        </ScrollViewer>
-        </StackPanel>
+        </ScrollViewer>        
     </Grid>
 </UserControl>

@@ -8,32 +8,36 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <DataTemplate x:Key="MainNaviMenuItemTemplate">
-            <Button Content="{Binding DisplayMember}"
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="{Binding IconPackUri}"></Image>
+                
+                <Button Content="{Binding DisplayMember}"
               Command="{Binding CommandOpenNavigationViewModel}" CommandParameter="{Binding ViewModelName}"
               FontSize="16">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Grid x:Name="grid">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid x:Name="grid">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Cursor" Value="Hand"/>                               
-                                <Setter Property="FontWeight" Value="Bold"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="FontWeight" Value="Normal"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="FontWeight" Value="Normal"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
-    
+
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >            
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
             <ItemsControl ItemsSource="{Binding MenuItems}"
                           ItemContainerStyle="{StaticResource NaviItemContainerStyle }"
                           ItemTemplate="{StaticResource MainNaviMenuItemTemplate}"/>

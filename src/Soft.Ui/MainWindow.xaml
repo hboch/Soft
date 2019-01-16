@@ -50,6 +50,11 @@
             <ToggleButton Content="Menu" IsChecked="{Binding IsMainNavigationViewShown}" Cursor="Hand"/>
         </Controls:WindowCommands>
     </Controls:MetroWindow.LeftWindowCommands>
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="About" Command="{Binding CommandCreateSingleDetailView}" CommandParameter="{x:Type bcAllgemein:AboutViewModel}" Cursor="Hand"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -59,9 +64,10 @@
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0">
-            <MenuItem Header="About"
+            <!--<MenuItem Header="About"
                       Command="{Binding CommandCreateSingleDetailView}"
-                      CommandParameter="{x:Type bcAllgemein:AboutViewModel}"/>
+                      CommandParameter="{x:Type bcAllgemein:AboutViewModel}"
+            />-->
 
         </Menu>
 
@@ -75,10 +81,10 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Controls:MetroTabControl Grid.Row="1" Grid.Column="1" 
+            <Controls:MetroTabControl Grid.Row="1" Grid.Column="1" Margin="5"
                                       ItemsSource="{Binding ViewModels, UpdateSourceTrigger=PropertyChanged}" 
                                       SelectedItem="{Binding SelectedViewModel, Mode=TwoWay}"
-                                      
+                                      Controls:TabControlHelper.Underlined="TabPanel"
                                       >
                 <Controls:MetroTabControl.ItemContainerStyle>
                     <Style TargetType="{x:Type Controls:MetroTabItem}">
@@ -86,6 +92,8 @@
                         <Setter Property="Controls:MetroTabItem.CloseButtonEnabled" Value="True"/>
                         <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="14"/>
                         <Setter Property="CloseTabCommand" Value="{Binding CommandClose}"/>
+                        <Setter Property="Controls:ControlsHelper.HeaderMargin" Value="5"/>
+                       
                     </Style>
                 </Controls:MetroTabControl.ItemContainerStyle>
             </Controls:MetroTabControl>
