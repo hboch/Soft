@@ -79,5 +79,30 @@ namespace Soft.Ui.Tests.Bc.BcCustomer
             //Assert
             Assert.Null(customer);
         }
+
+        //Next is actually an EntityBase.GetHashcode() test but is located here, because it is tested on entities read fromthe DB
+        [Fact]        
+        public async void GetHashCode_When_CustomerIsReadFromDbIntoTwoDifferentInstances_Should_ReturnSameHashcodes()
+        {
+            //Arrange
+            SoftDbContext _context = new SoftDbContext();
+            var _customerRepository = new CustomerRepository(_context);
+
+            //Act
+            //Get the first customer from the repository
+            var firstRepositoryCustomer = _context.Customers.FirstOrDefault();
+            Assert.NotNull(firstRepositoryCustomer);
+
+            //Re-Open the DB-Connection and read the customer from the repository again
+            _context = new SoftDbContext();
+            _customerRepository = new CustomerRepository(_context);
+            var customer2 = await _customerRepository.FindByIdAsync(firstRepositoryCustomer.Id);
+
+            //Ensure that the same customer data is stored in 2 different instances
+            Assert.False(ReferenceEquals(firstRepositoryCustomer, customer2));
+
+            //Assert that both instances return the same GetHashCode() value
+            Assert.Equal(customer2.GetHashCode(), firstRepositoryCustomer.GetHashCode());
+        }
     }
 }
