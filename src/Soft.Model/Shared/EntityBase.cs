@@ -14,16 +14,7 @@
         /// </summary>
         public int Id { get; set; }
 
-        /// <summary>
-        /// Display string to be used when Entity is shown in the UI for example to be selected in a ComboBox or NavigationControl
-        /// </summary>
-        public string LookupDisplayMember
-        {
-            get
-            {
-                return Id.ToString();
-            }
-        }
+        
         #endregion
     }
 }
