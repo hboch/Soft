@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soft.Ui.Tests", "Soft.Ui.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soft.DataAccess.Tests", "Soft.DataAccess.Tests\Soft.DataAccess.Tests.csproj", "{639CC193-890B-428C-B702-0EEF63123FAC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soft.Model.Tests", "Soft.Model.Tests\Soft.Model.Tests.csproj", "{A05DCD28-303E-46ED-B8D7-4E470A7F7BFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{639CC193-890B-428C-B702-0EEF63123FAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{639CC193-890B-428C-B702-0EEF63123FAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{639CC193-890B-428C-B702-0EEF63123FAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A05DCD28-303E-46ED-B8D7-4E470A7F7BFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A05DCD28-303E-46ED-B8D7-4E470A7F7BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A05DCD28-303E-46ED-B8D7-4E470A7F7BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A05DCD28-303E-46ED-B8D7-4E470A7F7BFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
