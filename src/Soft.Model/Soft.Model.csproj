@@ -50,6 +50,17 @@
     <Compile Include="Broker.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shared\CSharpFunctionalExtensions\AsyncMaybeExtensions.cs" />
+    <Compile Include="Shared\CSharpFunctionalExtensions\AsyncResultExtensionsBothOperands.cs" />
+    <Compile Include="Shared\CSharpFunctionalExtensions\AsyncResultExtensionsLeftOperand.cs" />
+    <Compile Include="Shared\CSharpFunctionalExtensions\AsyncResultExtensionsRightOperand.cs" />
+    <Compile Include="Shared\CSharpFunctionalExtensions\IResult.cs" />
+    <Compile Include="Shared\CSharpFunctionalExtensions\Maybe.cs" />
+    <Compile Include="Shared\CSharpFunctionalExtensions\MaybeExtensions.cs" />
+    <Compile Include="Shared\CSharpFunctionalExtensions\Result.cs" />
+    <Compile Include="Shared\CSharpFunctionalExtensions\ResultExtensions-TransactionScope.cs" />
+    <Compile Include="Shared\CSharpFunctionalExtensions\ResultExtensions.cs" />
+    <Compile Include="Shared\CSharpFunctionalExtensions\ValueObject.cs" />
     <Compile Include="Shared\EntityBase.cs" />
     <Compile Include="Shared\ExceptionExtensions.cs" />
     <Compile Include="Shared\LookupItem.cs" />
