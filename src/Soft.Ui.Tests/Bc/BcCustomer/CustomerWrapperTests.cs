@@ -11,6 +11,26 @@ namespace Soft.Ui.Tests.Bc.BcCustomer
     {
         private Customer _anyCustomer;
         private CustomerWrapper _customerWrapper;
+        /// <summary>
+        /// Derive an entity test class where Id can be set via constructor for test only
+        /// </summary>
+        private class CustomerTest : Customer
+        {
+            public CustomerTest(int id)
+            {
+                Id = id;
+            }
+        }
+        /// <summary>
+        /// Derive an entity test class where Id can be set via constructor for test only
+        /// </summary>
+        private class BankAccountTest : BankAccount
+        {
+            public BankAccountTest(int id)
+            {
+                Id = id;
+            }
+        }
 
         public CustomerWrapperTests()
         {
@@ -18,12 +38,11 @@ namespace Soft.Ui.Tests.Bc.BcCustomer
             var accountManager = new AccountManager();
             var bankAccounts = new List<BankAccount>()
                 {
-                    new BankAccount() { Id = 1, AccountNo = "1234567890" },
-                    new BankAccount() { Id = 2, AccountNo = "0000000001" }
+                    new BankAccountTest(id:1) {AccountNo = "1234567890" },
+                    new BankAccountTest(id:2) {AccountNo = "0000000001" }
             };
-            _anyCustomer = new Customer
-            {
-                Id = 2,
+            _anyCustomer = new CustomerTest(id:2)
+            {                
                 Name = "AnySurname AnyLastName",
                 InternetAdress = "http://microsoft.com",
                 AccountManager = accountManager,

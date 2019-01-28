@@ -33,6 +33,26 @@ namespace Soft.Ui.Tests.Bc.BcCustomer
         private List<BankAccount> _bankAccountsCustomerId1;
         private List<BankAccount> _bankAccountsCustomerId2;
 
+        /// <summary>
+        /// Derive an entity test class where Id can be set via constructor for test only
+        /// </summary>
+        private class CustomerTest : Customer
+        {
+            public CustomerTest(int id)
+            {
+                Id = id;
+            }
+        }
+        /// <summary>
+        /// Derive an entity test class where Id can be set via constructor for test only
+        /// </summary>
+        private class BankAccountTest : BankAccount
+        {
+            public BankAccountTest(int id)
+            {
+                Id = id;
+            }
+        }
         public CustomerDetailViewModelTests()
         {
             _messageDialogServiceMock = new Mock<IMessageDialogService>();
@@ -57,17 +77,17 @@ namespace Soft.Ui.Tests.Bc.BcCustomer
             var accountManager = new AccountManager();
             _bankAccountsCustomerId1 = new List<BankAccount>
                 {
-                    new BankAccount{Id=1, AccountNo ="1012345678", CustomerId=1},
-                    new BankAccount{Id=2, AccountNo ="1801234567", CustomerId=1}
+                    new BankAccountTest(id:1){ AccountNo ="1012345678", CustomerId=1},
+                    new BankAccountTest(id:2){ AccountNo ="1801234567", CustomerId=1}
                 };
             _bankAccountsCustomerId2 = new List<BankAccount>
                 {
-                    new BankAccount{Id=2, AccountNo ="2012345678", CustomerId=2}
+                    new BankAccountTest(2){ AccountNo ="2012345678", CustomerId=2}
                 };
             _customerList = new List<Customer>
                 {
-                    new Customer {Id=1, Name = "Bill Gates", AccountManager=accountManager, BankAccounts=_bankAccountsCustomerId1 },
-                    new Customer {Id=2, Name = "Edward Snowden", AccountManager=accountManager, BankAccounts=_bankAccountsCustomerId2 }
+                    new CustomerTest(1) { Name = "Bill Gates", AccountManager=accountManager, BankAccounts=_bankAccountsCustomerId1 },
+                    new CustomerTest(2) { Name = "Edward Snowden", AccountManager=accountManager, BankAccounts=_bankAccountsCustomerId2 }
                 };
 
             _customerRepositoryMock = new Mock<ICustomerRepository>();

@@ -14,7 +14,7 @@ namespace Soft.Model.Shared
         /// <summary>
         /// Unique Entity Id
         /// </summary>
-        public int Id { get; set; }
+        public virtual int Id { get; protected set; }
         #endregion
 
         public override bool Equals(object obj)

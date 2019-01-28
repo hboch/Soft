@@ -24,6 +24,26 @@ namespace Soft.Ui.Tests.Bc.BcBroker
 
         private Mock<IMessageDialogService> _messageDialogServiceMock;
 
+        /// <summary>
+        /// Derive an entity test class where Id can be set via constructor for test only
+        /// </summary>
+        private class CustomerTest : Customer
+        {
+            public CustomerTest(int id)
+            {
+                Id = id;
+            }
+        }
+        /// <summary>
+        /// Derive an entity test class where Id can be set via constructor for test only
+        /// </summary>
+        private class BrokerTest : Broker
+        {
+            public BrokerTest(int id)
+            {
+                Id = id;
+            }
+        }
         public BrokerDetailViewModelTests()
         {
             _messageDialogServiceMock = new Mock<IMessageDialogService>();
@@ -37,12 +57,12 @@ namespace Soft.Ui.Tests.Bc.BcBroker
 
             var customern = new List<Customer>
             {
-                    new Customer {Id=2, CustomerNo ="1", Name = "Edward Snowden"}
+                    new CustomerTest(2) {CustomerNo ="1", Name = "Edward Snowden"}
             };
 
             var _customernBrokerListe = new List<Broker>
             {
-                    new Broker {Id=1, CustomerNo = "1111", Name = "Broker 1", Customers=customern },
+                    new BrokerTest(1) { CustomerNo = "1111", Name = "Broker 1", Customers=customern },
             };
 
             _repositoryMock = new Mock<IBrokerRepository>();
