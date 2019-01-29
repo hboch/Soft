@@ -1,4 +1,5 @@
-﻿ using Soft.Model.Shared;
+﻿using CSharpFunctionalExtensions;
+using Soft.Model.Shared;
 using System.Threading.Tasks;
 
 namespace Soft.DataAccess.Shared.Repositories
@@ -16,12 +17,12 @@ namespace Soft.DataAccess.Shared.Repositories
         /// <param name="entityId">Id of Entity</param>
         /// <returns></returns>
         Task<TEntity> FindByIdAsync(int entityId);
-        
+
         /// <summary>
         /// Save Repository
         /// </summary>
         /// <returns></returns>
-        Task SaveAsync();
+        Task<Result> SaveAsync();
 
         /// <summary>
         /// Checks whether Repository has Changes

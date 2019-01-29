@@ -250,6 +250,23 @@ namespace Soft.Ui.Tests.Bc.BcCustomer
             _customerRepositoryMock.Verify(crm => crm.SaveAsync(), Times.Once);
         }
         [Fact]
+        public async void CommandSave_When_SaveAsync_Throws_DbUpdateException_Should_Display_MsgService_With_SaveFailed_Msg()
+        {
+            // Arrange
+            var anyInTheMockDefinedCustomerId = 2;
+            _customerRepositoryMock.Setup(crm => crm.SaveAsync()).ThrowsAsync(new DbUpdateException());
+            await _customerDetailViewModel.LoadAsync(anyInTheMockDefinedCustomerId);
+
+            _customerDetailViewModel.CommandSave.Execute(null);
+
+            //Assert
+            _messageDialogServiceMock.Verify(m => m.ShowInfoDialog("Entity can not be deleted as it is referenced by another Entity. Reference has to be removed before.", "Save failed"), Times.Once);
+            //else part in OnCommandSaveExecute must not be executed:
+            _customerRepositoryMock.Verify(crm => crm.HasChanges(), Times.Never);
+            _eventAfterDetailSavedMock.Verify(eadsm => eadsm.Publish(It.Is<EventAfterDetailSavedArgs>
+                (eadsa => eadsa.Id == anyInTheMockDefinedCustomerId)), Times.Never);
+        }
+        [Fact]
         public async void CommandSave_When_SaveAsync_Throws_DbUpdateConcurrencyException_Should_Display_MsgService_With_SaveFailed_Msg()
         {
             // Arrange

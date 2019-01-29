@@ -1,4 +1,5 @@
-﻿ using Soft.Model.Shared;
+﻿using CSharpFunctionalExtensions;
+using Soft.Model.Shared;
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -76,15 +77,14 @@ namespace Soft.DataAccess.Shared.Repositories
         /// Save all changes of the still open DbContext 
         /// </summary>
         /// <returns></returns>
-        public async Task SaveAsync()
+        public async Task<Result> SaveAsync()
         {
             //TODO Write unit test
             //TODO Write integration test
-
-            //TODO Prio 1: write function which returns <Result> i.e. an errorMessage in an erroe case
             try
             {
                 await this.Context.SaveChangesAsync();
+                return Result.Ok();
             }
             catch (DbUpdateException ex)
             {
@@ -94,11 +94,10 @@ namespace Soft.DataAccess.Shared.Repositories
                 {
                     errorMessage = "Entity can not be deleted as it is referenced by another Entity. Reference has to be removed before." + exMessage;
                 }
-                throw new Exception(errorMessage);
+                return Result.Fail(errorMessage);
             }
         }
- 
-        
+
         //see https://msdn.microsoft.com/en-us/library/jj592904(v=vs.113).aspx
         //catch (DbUpdateConcurrencyException ex)
         //{
@@ -110,24 +109,24 @@ namespace Soft.DataAccess.Shared.Repositories
         //        return;
         //    }
 
-                //    var result = await MessageDialogService.ShowOkCancelDialogAsync("The entity has been changed in "
-                //     + "the meantime by someone else. Click OK to save your changes anyway, click Cancel "
-                //     + "to reload the entity from the database.", "Question");
+        //    var result = await MessageDialogService.ShowOkCancelDialogAsync("The entity has been changed in "
+        //     + "the meantime by someone else. Click OK to save your changes anyway, click Cancel "
+        //     + "to reload the entity from the database.", "Question");
 
-                //    if (result == MessageDialogResult.OK)
-                //    {
-                //        // Update the original values with database-values
-                //        var entry = ex.Entries.Single();
-                //        entry.OriginalValues.SetValues(entry.GetDatabaseValues());
-                //        await saveFunc();
-                //    }
-                //    else
-                //    {
-                //        // Reload entity from database
-                //        await ex.Entries.Single().ReloadAsync();
-                //        await LoadAsync(Id);
-                //    }
-            }
+        //    if (result == MessageDialogResult.OK)
+        //    {
+        //        // Update the original values with database-values
+        //        var entry = ex.Entries.Single();
+        //        entry.OriginalValues.SetValues(entry.GetDatabaseValues());
+        //        await saveFunc();
+        //    }
+        //    else
+        //    {
+        //        // Reload entity from database
+        //        await ex.Entries.Single().ReloadAsync();
+        //        await LoadAsync(Id);
+        //    }
+    }
     #endregion
 }
 
